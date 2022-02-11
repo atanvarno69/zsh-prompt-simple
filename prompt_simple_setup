@@ -4,7 +4,7 @@
 #
 # https://github.com/atanvarno69/zsh-simple-prompt
 #
-# MIT License
+# MIT License <https://opensource.org/licenses/MIT>
 
 prompt_simple_help () {
     cat <<'EOF'
@@ -70,10 +70,10 @@ prompt_simple_setup () {
 
     # PS1
     PS1=' %(?.%F{$color}.%F{red})'
-    [ "${condensed}" -eq 0 ] && PS1+='$(lead)'
-    PS1+='%B$(ending)%b%f '
+    [ "${condensed}" -eq 0 ] && PS1+='$(prompt_simple_leading)'
+    PS1+='%B$(prompt_simple_ending)%b%f '
 
-    # RPS1 & RPS2
+    # RPS1 and RPS2
     RPS1='%(?..%F{red}[%?]%f)'
     RPS2=''
     [ "${time}" -gt 0 ] && { RPS1+='[%*]'; RPS2+='[%*]'; }
