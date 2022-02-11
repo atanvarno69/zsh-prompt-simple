@@ -1,0 +1,88 @@
+#!/usr/bin/env zsh
+#
+# zsh simple prompt
+#
+# https://github.com/atanvarno69/zsh-simple-prompt
+#
+# MIT License
+
+prompt_simple_help () {
+    cat <<'EOF'
+A simple prompt displaying the present working directory. This prompt is
+colorable. You can invoke it with:
+
+    prompt simple [OPTIONS...] [COLOR]
+
+OPTIONS
+    -c | --condensed  Display only the present working directory base name,
+                      without the leading full path.
+    -t | --time       Display the clock on the right of the screen.
+
+COLOR
+     The color to use for the prompt, defaults to green. The color becomes red
+     when the last command exited with a failure code.
+
+     For valid color options see:
+     https://zsh.sourceforge.io/Doc/Release/Zsh-Line-Editor.html#Character-Highlighting
+EOF
+}
+
+prompt_simple_leading() {
+    dir=$(pwd)
+    if [ "${dir}" = "${HOME}" ] || [ "${dir}" = '/' ]; then
+        echo '';
+    else
+        dir=$(echo "${dir}" | sed "s:${HOME}:~:")
+        echo "$(dirname ${dir})/" | sed 's://:/:'
+    fi
+}
+
+prompt_simple_ending() {
+    dir=$(pwd)
+    if [ "${dir}" = "${HOME}" ]; then
+        echo '~'
+    elif [ "${dir}" = '/' ]; then
+        echo '/'
+    else
+        basename "${dir}"
+    fi
+}
+
+prompt_simple_setup () {
+    # Set zsh options
+    prompt_opts=(cr percent subst)
+
+    # Set function option defaults
+    condensed=0; time=0
+
+    # Process function options
+    while [ -n "${1}" ]; do
+        case "${1}" in
+            -c|--condensed) condensed=1 ;;
+            -t|--time) time=1 ;;
+            --) break ;;
+            -*) echo "Unrecognized option ${1}." 1>&2; return 1 ;;
+            *) break ;;
+        esac
+        shift
+    done
+    color="${1:-green}"
+
+    # PS1
+    PS1=' %(?.%F{$color}.%F{red})'
+    [ "${condensed}" -eq 0 ] && PS1+='$(lead)'
+    PS1+='%B$(ending)%b%f '
+
+    # RPS1 & RPS2
+    RPS1='%(?..%F{red}[%?]%f)'
+    RPS2=''
+    [ "${time}" -gt 0 ] && { RPS1+='[%*]'; RPS2+='[%*]'; }
+
+    # PS2, PS3, PS4 and SPROMPT
+    PS2=' %F{$color}%_>%f '
+    PS3=' %F{$color}?%f '
+    PS4='+%F{$color}%N%f:%F{$color}%i>%f '
+    SPROMPT='%F{red}%R%f > %F{$color}%r%f [nyae]%F{$color}?%f '
+}
+
+prompt_simple_setup "${@}"
