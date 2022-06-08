@@ -1,9 +1,9 @@
-# zsh simple prompt
+# zsh-prompt-simple
 
-[![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](https://github.com/atanvarno69/zsh-simple-prompt/blob/master/LICENSE)
-[![Latest Version](https://img.shields.io/github/release/atanvarno69/zsh-simple-prompt.svg?style=flat-square)](https://github.com/atanvarno69/zsh-simple-prompt/releases)
+[![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](https://github.com/atanvarno69/zsh-prompt-simple/blob/master/LICENSE)
+[![Latest Version](https://img.shields.io/github/release/atanvarno69/zsh-prompt-simple.svg?style=flat-square)](https://github.com/atanvarno69/zsh-prompt-simple/releases)
 
-A simple prompt displaying the present working directory.
+A simple prompt for [zsh](https://www.zsh.org) displaying the present working directory.
 
 # Requirements
 
