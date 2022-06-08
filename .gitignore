@@ -1,2 +1,8 @@
-# Managed by CI
+# Directories
 build/
+pkg/
+src/
+
+# Files
+*.tar*
+*.log
