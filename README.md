@@ -11,16 +11,12 @@ A simple prompt for [zsh](https://www.zsh.org) displaying the present working di
 
 # Installation
 
-Clone this repo:
-
-```sh
-git clone https://github.com/atanvarno69/zsh-simple-prompt.git
-```
+Clone this repo.
 
 To install locally as a user, copy or symlink `prompt_simple_setup` to somewhere in your
 [`$fpath`](https://zsh.sourceforge.io/Doc/Release/Parameters.html#index-fpath).
 
-To install globally as root, copy or symlink `prompt_simple_setup` to `/usr/share/zsh/Prompts`.
+To install globally as root, copy or symlink `prompt_simple_setup` to `/usr/share/zsh/Prompts/`.
 
 # Usage
 
