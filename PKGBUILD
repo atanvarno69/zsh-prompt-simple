@@ -6,7 +6,6 @@ arch=('any')
 url="https://github.com/atanvarno69/${pkgname}"
 license=('MIT')
 depends=('zsh')
-makedepends=('git')
 source=("${pkgname}-${pkgver}.tar.gz::https://api.github.com/repos/atanvarno69/${pkgname}/tarball/${pkgver}")
 sha256sums=('SKIP')
 
