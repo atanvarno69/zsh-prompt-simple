@@ -35,10 +35,10 @@ prompt -p simple
 
 ## Color
 
-To change the default green color, pass a color argument:
+To change the default green color, use the option `-c` or `--color` with a color argument:
 
 ```zsh
-prompt -p simple blue
+prompt -p simple --color blue
 ```
 
 See the [zsh documentation](https://zsh.sourceforge.io/Doc/Release/Zsh-Line-Editor.html#Character-Highlighting) for
