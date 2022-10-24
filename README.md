@@ -44,13 +44,13 @@ prompt -p simple --color blue
 See the [zsh documentation](https://zsh.sourceforge.io/Doc/Release/Zsh-Line-Editor.html#Character-Highlighting) for
 valid color options.
 
-## Condensed
+## Simpler
 
-To only show the present working directory basename, without the leading full path, use the option `-c` or
-`--condensed`.
+To only show the present working directory basename, without the leading full path, use the option `-s` or
+`--simpler`.
 
 ```zsh
-prompt -p simple --condensed
+prompt -p simple --simpler
 ```
 
 ## Clock
