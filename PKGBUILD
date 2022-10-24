@@ -17,5 +17,5 @@ package() {
     cd "${pkgname}-${pkgver}"
     mkdir -p "${pkgdir}/usr/share/licenses/${pkgname}"
     cp -f LICENSE "${pkgdir}/usr/share/licenses/${pkgname}/"
-    cp -f prompt_simple_setup "${pkgdir}/usr/share/zsh/Prompts/"
+    cp -f prompt_simple_setup "${pkgdir}/usr/share/zsh/functions/Prompts/"
 }
