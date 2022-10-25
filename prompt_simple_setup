@@ -6,7 +6,7 @@
 #
 # MIT License <https://opensource.org/licenses/MIT>
 
-prompt_simple_help () {
+prompt_simple_help() {
     cat <<'EOF'
 A simple prompt displaying the present working directory. This prompt is
 colorable. You can invoke it with:
@@ -24,12 +24,25 @@ OPTIONS
     -t | --time           Display the clock on the right of the screen.
 
 COLOR
-     For valid color options see:
-     https://zsh.sourceforge.io/Doc/Release/Zsh-Line-Editor.html#Character-Highlighting
+    For valid color options see:
+    https://zsh.sourceforge.io/Doc/Release/Zsh-Line-Editor.html#Character-Highlighting
 EOF
 }
 
-prompt_simple_setup () {
+prompt_simple_ending() {
+    basename "$(print -P %~)"
+}
+
+prompt_simple_leading() {
+    # Prepare PWD
+    lead="$(dirname "$(print -P %~)")"
+    [ "${lead}" = '.' ] && echo '' && return 0
+    [ "${lead}" != '/' ] && echo "${lead}/" && return 0
+    [ "$(prompt_simple_ending)" = '/' ] && echo '' && return 0
+    echo "${lead}"
+}
+
+prompt_simple_setup() {
     # Set zsh options
     prompt_opts=(cr percent subst)
 
@@ -50,22 +63,10 @@ prompt_simple_setup () {
         shift
     done
 
-    # Prepare PWD
-    dir=$(print -P %~)
-    lead=$(dirname ${dir})
-    trail=$(basename ${dir})
-    if [ "${lead}" = '.' ]; then
-        lead=''
-    elif [ "${lead}" = '/' ] && [ "${trail}" = '/' ]; then
-        lead=''
-    elif [ "${lead}" != '/' ]; then
-        lead+='/'
-    fi
-
     # PS1
     PS1=' %(?.%F{$color}.$F{$error})'
-    [ "${simpler}" -eq 0 ] && PS1+='$lead'
-    PS1+='%B$trail%b%f '
+    [ "${simpler}" -eq 0 ] && PS1+='$(prompt_simple_leading)'
+    PS1+='%B$(prompt_simple_ending)%b%f '
 
     # RPS1 and RPS2
     RPS1='%(?..%F{$error}[%?]%f)'
@@ -76,7 +77,7 @@ prompt_simple_setup () {
     PS2=' %F{$color}%_>%f '
     PS3=' %F{$color}?%f '
     PS4='+%F{$color}%N%f:%F{$color}%i>%f '
-    SPROMPT='%F{red}%R%f > %F{$color}%r%f [nyae]%F{$color}?%f '
+    SPROMPT='%F{$error}%R%f > %F{$color}%r%f [nyae]%F{$color}?%f '
 }
 
 prompt_simple_setup "${@}"
