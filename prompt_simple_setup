@@ -64,7 +64,7 @@ prompt_simple_setup() {
     done
 
     # PS1
-    PS1=' %(?.%F{$color}.$F{$error})'
+    PS1=' %(?.%F{$color}.%F{$error})'
     [ "${simpler}" -eq 0 ] && PS1+='$(prompt_simple_leading)'
     PS1+='%B$(prompt_simple_ending)%b%f '
 
